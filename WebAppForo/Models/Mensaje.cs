@@ -11,15 +11,14 @@ namespace WebAppForo.Models
         [Key]
         public int MsgId { get; set; }
 
-        [ForeignKey("UserId")]
-        public int? UserId { get; set; }
-
         [StringLength(500)]
         public string Texto { get; set; } = null!;
 
         [StringLength(500)]
         public string? Imagen { get; set; }
 
-        public virtual Usuario User { get; set; } = null!;
+        [ForeignKey("UserId")]
+        public int? UserId { get; set; }
+        public Usuario? User { get; set; } = null!;
     }
 }

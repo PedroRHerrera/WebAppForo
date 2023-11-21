@@ -57,7 +57,7 @@ namespace WebAppForo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MsgId,UserId,Texto,Imagen")] Mensaje mensaje)
+        public async Task<IActionResult> Create([Bind("MsgId,UserId,User,Texto,Imagen")] Mensaje mensaje)
         {
             if (ModelState.IsValid)
             {
