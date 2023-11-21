@@ -1,0 +1,53 @@
+﻿@model IEnumerable<WebAppForo.Models.Juego>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreJuego)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescJuego)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImgJuego)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posicion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreJuego)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescJuego)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImgJuego)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Posicion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.JuegoId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.JuegoId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.JuegoId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
