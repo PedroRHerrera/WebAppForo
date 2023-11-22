@@ -148,6 +148,7 @@ namespace WebAppForo.Controllers
             var usuario = await _context.Usuarios.FindAsync(id);
             if (usuario != null)
             {
+                //MensajeController.DeleteConfirmed(id);
                 _context.Usuarios.Remove(usuario);
             }
             
