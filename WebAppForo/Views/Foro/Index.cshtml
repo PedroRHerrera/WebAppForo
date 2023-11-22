@@ -115,42 +115,59 @@
 
 </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@* CHAT DE LA COMUNIDAD *@
+<div class="text-center">
+    <h1>________________________________________________________________</h1>
+</div>
+<p></p>
+<div class="text-center">
+    <h3 class="display-6">Chat de la Comunidad</h3>
+</div>
+<p></p>
+
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Texto)
+                <h5>@Html.DisplayNameFor(model => model.User)</h5>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Imagen)
+                <h5>@Html.DisplayNameFor(model => model.Texto)</h5>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                <h5>@Html.DisplayNameFor(model => model.Imagen)</h5>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Texto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Imagen)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.UserId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MsgId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MsgId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MsgId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <h5>@Html.DisplayFor(modelItem => item.User.UserName)</h5>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Texto)
+                </td>
+                <td>
+                    <img src="img/@Html.DisplayFor(modelItem => item.Imagen)" alt="astronauta">
+
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MsgId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.MsgId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.MsgId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<div class="text-center">
+    <p>
+        <a asp-action="Create">Escribe un Mensaje</a>
+    </p>
+</div>
