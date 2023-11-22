@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using WebAppForo.Context;
 using WebAppForo.Models;
 
@@ -22,9 +25,9 @@ namespace WebAppForo.Controllers
         // GET: Usuario
         public async Task<IActionResult> Index()
         {
-              return _context.Usuarios != null ? 
-                          View(await _context.Usuarios.ToListAsync()) :
-                          Problem("Entity set 'WebAppDatabaseContext.Usuarios'  is null.");
+            return _context.Usuarios != null ?
+                        View(await _context.Usuarios.ToListAsync()) :
+                        Problem("Entity set 'WebAppDatabaseContext.Usuarios'  is null.");
         }
 
         // GET: Usuario/Details/5
@@ -148,17 +151,22 @@ namespace WebAppForo.Controllers
             var usuario = await _context.Usuarios.FindAsync(id);
             if (usuario != null)
             {
-                //MensajeController.DeleteConfirmed(id);
                 _context.Usuarios.Remove(usuario);
             }
-            
-            await _context.SaveChangesAsync();
+           try
+           {
+                await _context.SaveChangesAsync();
+           } catch (DbUpdateException ex) { ex.ToString();
+               return Problem("No puede eliminarse el Usuario porque tiene mensajes cargados. Elimine los mensajes primero.");
+           }
+
             return RedirectToAction(nameof(Index));
+            
         }
 
         private bool UsuarioExists(int id)
         {
-          return (_context.Usuarios?.Any(e => e.UserId == id)).GetValueOrDefault();
+            return (_context.Usuarios?.Any(e => e.UserId == id)).GetValueOrDefault();
         }
     }
 }

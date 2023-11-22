@@ -21,6 +21,9 @@ namespace WebAppForo.Models
         [StringLength(100)]
         public string UserMail { get; set; } = null!;
 
+        [StringLength(20)]
+        public string UserPassword { get; set; } = null!;
+
         public virtual ICollection<Mensaje> Mensajes { get; set; }
     }
 }
