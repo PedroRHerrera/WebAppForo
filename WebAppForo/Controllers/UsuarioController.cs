@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using WebAppForo.Context;
 using WebAppForo.Models;
 
@@ -25,9 +22,9 @@ namespace WebAppForo.Controllers
         // GET: Usuario
         public async Task<IActionResult> Index()
         {
-            return _context.Usuarios != null ?
-                        View(await _context.Usuarios.ToListAsync()) :
-                        Problem("Entity set 'WebAppDatabaseContext.Usuarios'  is null.");
+              return _context.Usuarios != null ? 
+                          View(await _context.Usuarios.ToListAsync()) :
+                          Problem("Entity set 'WebAppDatabaseContext.Usuarios'  is null.");
         }
 
         // GET: Usuario/Details/5
@@ -59,7 +56,7 @@ namespace WebAppForo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,UserName,UserMail")] Usuario usuario)
+        public async Task<IActionResult> Create([Bind("UserId,UserName,UserMail,UserPassword")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +88,7 @@ namespace WebAppForo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserId,UserName,UserMail")] Usuario usuario)
+        public async Task<IActionResult> Edit(int id, [Bind("UserId,UserName,UserMail,UserPassword")] Usuario usuario)
         {
             if (id != usuario.UserId)
             {
@@ -153,20 +150,14 @@ namespace WebAppForo.Controllers
             {
                 _context.Usuarios.Remove(usuario);
             }
-           try
-           {
-                await _context.SaveChangesAsync();
-           } catch (DbUpdateException ex) { ex.ToString();
-               return Problem("No puede eliminarse el Usuario porque tiene mensajes cargados. Elimine los mensajes primero.");
-           }
-
-            return RedirectToAction(nameof(Index));
             
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         private bool UsuarioExists(int id)
         {
-            return (_context.Usuarios?.Any(e => e.UserId == id)).GetValueOrDefault();
+          return (_context.Usuarios?.Any(e => e.UserId == id)).GetValueOrDefault();
         }
     }
 }
