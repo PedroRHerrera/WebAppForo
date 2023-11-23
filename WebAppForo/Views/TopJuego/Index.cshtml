@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WebAppForo.Models.Juego>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<p></p>
+<div class="text-center">
+    <p></p>
+    <h1 class="display-4">&#128302;  <strong>Top 5</strong> Juegos &#127918;</h1>
+    <h1>________________________________________________________________</h1>
+</div>
+
+<div class="text-center">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Posicion) 
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NombreJuego)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DescJuego)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImgJuego)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <h5>@Html.DisplayFor(modelItem => item.Posicion)</h5>
+                    </td>
+                    <td>
+                        <h5>@Html.DisplayFor(modelItem => item.NombreJuego)</h5>
+                    </td>
+                    <td>
+                        <h5>@Html.DisplayFor(modelItem => item.DescJuego)</h5>                      
+                    </td>
+                    <td>
+                        <img src="img/@Html.DisplayFor(modelItem => item.ImgJuego)" alt="imgJuego">
+                    </td>
+@*                     <td>
+                        <a asp-action="Edit" asp-route-id="@item.JuegoId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.JuegoId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.JuegoId">Delete</a>
+                    </td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@* <p>
+    <a asp-action="Create">Create New</a>
+</p> *@
+
