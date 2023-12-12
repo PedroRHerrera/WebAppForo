@@ -5,10 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using WebAppForo.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace WebAppForo.Context
 {
-    public class WebAppDatabaseContext : DbContext
+    public class WebAppDatabaseContext : IdentityDbContext
     {
 
         public WebAppDatabaseContext()
